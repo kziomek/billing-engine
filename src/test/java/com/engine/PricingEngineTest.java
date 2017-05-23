@@ -22,7 +22,7 @@ public class PricingEngineTest {
 
     @Test
     public void calculateShouldDiscount60PercentForDiagnosisForCitizensAgedBetween65And70() {
-        SimpleProduct diagnosis = new SimpleProduct("Diagnosis", new BigDecimal("60"));
+        SimpleProduct diagnosis = new SimpleProduct("Diagnosis", new BigDecimal("60.00"));
         Set<Fact> facts = new HashSet<>();
         facts.add(new AgeFact(65));
 
@@ -33,18 +33,18 @@ public class PricingEngineTest {
 
     @Test
     public void calculateShouldntDiscountForDiagnosisForCitizensAged50() {
-        SimpleProduct diagnosis = new SimpleProduct("Diagnosis", new BigDecimal("60"));
+        SimpleProduct diagnosis = new SimpleProduct("Diagnosis", new BigDecimal("60.00"));
         Set<Fact> facts = new HashSet<>();
         facts.add(new AgeFact(50));
 
         Item item = new PricingEngine().calculate(diagnosis, facts);
 
-        Assert.assertEquals(new BigDecimal("60"), item.getDiscountedPrice());
+        Assert.assertEquals(new BigDecimal("60.00"), item.getDiscountedPrice());
     }
 
     @Test
     public void calculateShouldDiscount90PercentForXRayWhenCitizenOlderThan70() {
-        SimpleProduct xray = new SimpleProduct("X-Ray", new BigDecimal("150"));
+        SimpleProduct xray = new SimpleProduct("X-Ray", new BigDecimal("150.00"));
         Set<Fact> facts = new HashSet<>();
         facts.add(new AgeFact(75));
 
@@ -55,7 +55,7 @@ public class PricingEngineTest {
 
     @Test
     public void calculateShouldDiscount40PercentForBloodTestWhenChildYoungerThan5() {
-        SimpleProduct bloodTest = new SimpleProduct("Blood Test", new BigDecimal("78"));
+        SimpleProduct bloodTest = new SimpleProduct("Blood Test", new BigDecimal("78.00"));
         Set<Fact> facts = new HashSet<>();
         facts.add(new AgeFact(4));
 
@@ -66,7 +66,7 @@ public class PricingEngineTest {
 
     @Test
     public void calculateShouldApplyAdditional15PercentDiscountOnBloodTestWhenDiagnosedByMediHealth() {
-        SimpleProduct bloodTest = new SimpleProduct("Blood Test", new BigDecimal("78"));
+        SimpleProduct bloodTest = new SimpleProduct("Blood Test", new BigDecimal("78.00"));
         Set<Fact> facts = new HashSet<>();
         facts.add(new AgeFact(4));
         facts.add(new PractitionerFact("MediHealth"));
@@ -80,7 +80,7 @@ public class PricingEngineTest {
 
     @Test
     public void calculateShouldNotApplyAdditional15PercentWithoutMediHealthInsurance() {
-        SimpleProduct bloodTest = new SimpleProduct("Blood Test", new BigDecimal("78"));
+        SimpleProduct bloodTest = new SimpleProduct("Blood Test", new BigDecimal("78.00"));
         Set<Fact> facts = new HashSet<>();
         facts.add(new AgeFact(25));
         facts.add(new PractitionerFact("MediHealth"));
@@ -88,13 +88,13 @@ public class PricingEngineTest {
 
         Item item = new PricingEngine().calculate(bloodTest, facts);
 
-        Assert.assertEquals(new BigDecimal("78"), item.getDiscountedPrice());
+        Assert.assertEquals(new BigDecimal("78.00"), item.getDiscountedPrice());
 
     }
 
     @Test
     public void calculateShouldNotApplyAdditional15PercentForXRay() {
-        SimpleProduct bloodTest = new SimpleProduct("X-Ray", new BigDecimal("150"));
+        SimpleProduct bloodTest = new SimpleProduct("X-Ray", new BigDecimal("150.00"));
         Set<Fact> facts = new HashSet<>();
         facts.add(new AgeFact(50));
         facts.add(new PractitionerFact("MediHealth"));
@@ -102,7 +102,7 @@ public class PricingEngineTest {
 
         Item item = new PricingEngine().calculate(bloodTest, facts);
 
-        Assert.assertEquals(new BigDecimal("150"), item.getDiscountedPrice());
+        Assert.assertEquals(new BigDecimal("150.00"), item.getDiscountedPrice());
 
     }
 
