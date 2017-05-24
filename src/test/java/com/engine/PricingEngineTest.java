@@ -108,7 +108,7 @@ public class PricingEngineTest {
 
     @Test
     public void calculateShouldDiscountVaccineServiceButNotVaccines() {
-        ComponentProduct vaccine = new ComponentProduct("Vaccine", new BigDecimal("27.50"), new BigDecimal("2"), new BigDecimal("15.00"));
+        ComponentProduct vaccine = new ComponentProduct("Vaccine", new BigDecimal("27.50"), "Vaccine", new BigDecimal("2"), new BigDecimal("15.00"));
         Set<Fact> facts = new HashSet<>();
         facts.add(new AgeFact(80));
 

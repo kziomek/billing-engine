@@ -11,15 +11,13 @@ public class ComponentProduct extends Product {
     private String serviceName;
     private BigDecimal servicePrice;
 
-    private BigDecimal componentNumber;
-    private BigDecimal componentPrice;
+    private Component component;
 
 
-    public ComponentProduct(String serviceName, BigDecimal servicePrice, BigDecimal componentNumber, BigDecimal componentPrice) {
+    public ComponentProduct(String serviceName, BigDecimal servicePrice, String componentName, BigDecimal componentNumber, BigDecimal componentPrice) {
         this.serviceName = serviceName;
         this.servicePrice = servicePrice;
-        this.componentNumber = componentNumber;
-        this.componentPrice = componentPrice;
+        component = new Component(componentName, componentNumber, componentPrice);
     }
 
     @Override
@@ -34,7 +32,7 @@ public class ComponentProduct extends Product {
 
     @Override
     public BigDecimal getComponentsPrice() {
-        return componentNumber.multiply(componentPrice);
+        return component.getNumber().multiply(component.getPrice());
     }
 
 }
